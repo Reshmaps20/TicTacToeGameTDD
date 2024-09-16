@@ -1,17 +1,27 @@
 package com.tdd.tictactoegametdd.service;
 
+import java.util.Arrays;
+
 import com.tdd.tictactoegametdd.model.PlayerMove;
 
 public class TicTacToeService {
 
+	private char[][] board = new char[3][3];
+
+	public void initializeBoard() {
+		Arrays.stream(board).forEach(row -> Arrays.fill(row, ' '));
+	}
+
 	public String makeMove(PlayerMove playerMove) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String resetGame() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public char[][] getBoard() {
+		return board;
 	}
 
 }
