@@ -22,11 +22,12 @@ public class TicTacToeService {
 		int row = playerMove.getRow();
 		int col = playerMove.getColumn();
 
-		board[row][col] = currentPlayer;
-
-		getNextPlayer();
-
-		return "Move completed!";
+		if(board[row][col] == ' ') {
+			board[row][col] = currentPlayer;
+			getNextPlayer();
+			return "Move completed!";
+		}
+		return "Invalid";
 	}
 
 	public String resetGame() {
