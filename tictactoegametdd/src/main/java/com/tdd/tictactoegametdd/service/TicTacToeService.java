@@ -38,7 +38,7 @@ public class TicTacToeService {
 			return "The game is a draw!";
 		}
 
-		if (checkRows(currentPlayer) || checkColumns(currentPlayer)) {
+		if (checkRows(currentPlayer) || checkColumns(currentPlayer) || checkDiagonal(currentPlayer)) {
 			gameWon = true;
 			return "Player " + currentPlayer + " wins!";
 		}
@@ -46,6 +46,10 @@ public class TicTacToeService {
 		return "Move completed!";
 	}
 
+	private boolean checkDiagonal(char currentPlayer) {
+		return IntStream.range(0, 3).allMatch(i -> board[i][i] == currentPlayer);
+	}
+	
 	private boolean checkColumns(char currentPlayer) {
 		return IntStream.range(0, 3).anyMatch(i -> (IntStream.range(0, 3).allMatch(j -> board[j][i] == currentPlayer)));
 	}
