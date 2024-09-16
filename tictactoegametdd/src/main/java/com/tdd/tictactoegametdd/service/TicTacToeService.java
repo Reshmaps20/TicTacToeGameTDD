@@ -7,6 +7,7 @@ import com.tdd.tictactoegametdd.model.PlayerMove;
 public class TicTacToeService {
 
 	private char[][] board = new char[3][3];
+	private char currentPlayer = 'X';
 
 	public TicTacToeService() {
 		initializeBoard();
@@ -17,7 +18,13 @@ public class TicTacToeService {
 	}
 
 	public String makeMove(PlayerMove playerMove) {
-		return null;
+
+		int row = playerMove.getRow();
+		int col = playerMove.getColumn();
+
+		board[row][col] = currentPlayer;
+
+		return "Move completed!";
 	}
 
 	public String resetGame() {
