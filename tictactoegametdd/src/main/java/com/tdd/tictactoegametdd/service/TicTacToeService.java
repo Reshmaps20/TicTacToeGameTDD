@@ -23,7 +23,7 @@ public class TicTacToeService {
 		int row = playerMove.getRow();
 		int col = playerMove.getColumn();
 
-		if (board[row][col] == ' ') {
+		if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ') {
 			board[row][col] = currentPlayer;
 			getNextPlayer();
 			return "Move completed!";

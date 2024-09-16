@@ -66,5 +66,13 @@ public class TicTacToeServiceTest {
 			ticTacToeService.makeMove(new PlayerMove(0, 1));
 		});
 	}
+	
+	@Test
+	public void testMakeMove_CheckTheSelectedPositionByThePlayerIsWithinTheRangeOfBoard_ReturnValidMove() throws InvalidMoveException {
+
+		PlayerMove player = new PlayerMove(0, 1);
+		String result = ticTacToeService.makeMove(player);
+		assertTrue(result.contains("Move completed!"));
+	}
 
 }
