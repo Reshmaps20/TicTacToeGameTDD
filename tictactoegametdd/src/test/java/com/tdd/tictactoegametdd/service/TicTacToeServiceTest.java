@@ -166,5 +166,26 @@ public class TicTacToeServiceTest {
 
 		assertTrue(result.contains("Player " + ticTacToeService.getCurrentPlayer() + " wins!"));
 	}
+	
+	@Test
+	public void testMakeMove_PlayerWinsByCompletingRightTopToLeftBottomDiagonalPosition_ReturnPlayerWhoWins() throws InvalidMoveException {
+
+		PlayerMove firstMove = new PlayerMove(0, 2);
+		ticTacToeService.makeMove(firstMove);
+
+		PlayerMove secondMove = new PlayerMove(0, 1);
+		ticTacToeService.makeMove(secondMove);
+
+		PlayerMove thirdMove = new PlayerMove(1, 1);
+		ticTacToeService.makeMove(thirdMove);
+
+		PlayerMove forthMove = new PlayerMove(2, 1);
+		ticTacToeService.makeMove(forthMove);
+
+		PlayerMove fifthMove = new PlayerMove(2, 0);
+		String result = ticTacToeService.makeMove(fifthMove);
+
+		assertTrue(result.contains("Player " + ticTacToeService.getCurrentPlayer() + " wins!"));
+	}
 
 }

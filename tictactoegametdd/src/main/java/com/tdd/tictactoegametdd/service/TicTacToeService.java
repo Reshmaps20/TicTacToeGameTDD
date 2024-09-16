@@ -47,9 +47,10 @@ public class TicTacToeService {
 	}
 
 	private boolean checkDiagonal(char currentPlayer) {
-		return IntStream.range(0, 3).allMatch(i -> board[i][i] == currentPlayer);
+		return IntStream.range(0, 3).allMatch(i -> board[i][i] == currentPlayer)
+				|| IntStream.range(0, 3).allMatch(i -> board[i][2 - i] == currentPlayer);
 	}
-	
+
 	private boolean checkColumns(char currentPlayer) {
 		return IntStream.range(0, 3).anyMatch(i -> (IntStream.range(0, 3).allMatch(j -> board[j][i] == currentPlayer)));
 	}
