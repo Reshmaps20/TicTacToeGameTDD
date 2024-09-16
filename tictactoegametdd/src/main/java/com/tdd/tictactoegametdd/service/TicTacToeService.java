@@ -23,12 +23,8 @@ public class TicTacToeService {
 		int col = playerMove.getColumn();
 
 		board[row][col] = currentPlayer;
-		
-		if ('X' == currentPlayer) {
-			currentPlayer = 'O';
-		} else {
-			currentPlayer = 'X';
-		}
+
+		getNextPlayer();
 
 		return "Move completed!";
 	}
@@ -43,6 +39,10 @@ public class TicTacToeService {
 
 	public char getCurrentPlayer() {
 		return currentPlayer;
+	}
+
+	private void getNextPlayer() {
+		currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
 	}
 
 }
