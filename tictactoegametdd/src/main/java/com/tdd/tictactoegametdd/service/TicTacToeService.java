@@ -11,6 +11,7 @@ public class TicTacToeService {
 	private char[][] board = new char[3][3];
 	private char currentPlayer = 'X';
 	private boolean gameDraw = false;
+	private boolean gameWon = false;
 
 	public TicTacToeService() {
 		initializeBoard();
@@ -31,14 +32,22 @@ public class TicTacToeService {
 		}
 
 		board[row][col] = currentPlayer;
-		getNextPlayer();
-		
+
 		if (isBoardFull()) {
 			gameDraw = true;
 			return "The game is a draw!";
 		}
-		
+
+		if (checkRows(currentPlayer)) {
+			gameWon = true;
+			return "Player " + currentPlayer + " wins!";
+		}
+		getNextPlayer();
 		return "Move completed!";
+	}
+
+	private boolean checkRows(char currentPlayer) {
+		return IntStream.range(0, 3).anyMatch(i -> (IntStream.range(0, 3).allMatch(j -> board[i][j] == currentPlayer)));
 	}
 
 	private boolean isBoardFull() {

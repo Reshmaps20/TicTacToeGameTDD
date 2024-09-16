@@ -68,7 +68,8 @@ public class TicTacToeServiceTest {
 	}
 	
 	@Test
-	public void testMakeMove_CheckTheSelectedPositionByThePlayerIsWithinTheRangeOfBoard_ReturnValidMove() throws InvalidMoveException {
+	public void testMakeMove_CheckTheSelectedPositionByThePlayerIsWithinTheRangeOfBoard_ReturnValidMove()
+			throws InvalidMoveException {
 
 		PlayerMove player = new PlayerMove(0, 1);
 		String result = ticTacToeService.makeMove(player);
@@ -101,6 +102,27 @@ public class TicTacToeServiceTest {
 			}
 		}
 		return result;
+	}
+
+	@Test
+	public void testMakeMove_PlayerWinsByCompletingARow_ReturnPlayerWhoWins() throws InvalidMoveException {
+
+		PlayerMove firstMove = new PlayerMove(0, 0);
+		ticTacToeService.makeMove(firstMove);
+
+		PlayerMove secondMove = new PlayerMove(1, 0);
+		ticTacToeService.makeMove(secondMove);
+
+		PlayerMove thirdMove = new PlayerMove(0, 1);
+		ticTacToeService.makeMove(thirdMove);
+
+		PlayerMove forthMove = new PlayerMove(1, 1);
+		ticTacToeService.makeMove(forthMove);
+
+		PlayerMove fifthMove = new PlayerMove(0, 2);
+		String result = ticTacToeService.makeMove(fifthMove);
+
+		assertTrue(result.contains("Player " + ticTacToeService.getCurrentPlayer() + " wins!"));
 	}
 
 }
