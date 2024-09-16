@@ -75,4 +75,14 @@ public class TicTacToeServiceTest {
 		assertTrue(result.contains("Move completed!"));
 	}
 
+	@Test
+	public void testMakeMove_ThrowsExceptionWhenTheSelectedPositionIsOutOfRange_ReturnInvalidMoveException()
+			throws InvalidMoveException {
+
+		PlayerMove player = new PlayerMove(3, 1);
+		assertThrows(InvalidMoveException.class, () -> {
+			ticTacToeService.makeMove(player);
+		});
+	}
+
 }
