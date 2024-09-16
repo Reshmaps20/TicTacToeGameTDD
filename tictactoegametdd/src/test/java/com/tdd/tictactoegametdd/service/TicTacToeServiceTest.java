@@ -46,11 +46,13 @@ public class TicTacToeServiceTest {
 	}
 	
 	@Test
-	public void testMakeMove_CheckTheSelectedPositionByThePlayerIsEmpty_ReturnInvalidMove() {
+	public void testMakeMove_CheckTheSelectedPositionByThePlayerIsEmpty_ReturnValidMove() {
 
 		PlayerMove player = new PlayerMove(0,1);
 		String result = ticTacToeService.makeMove(player);
 		assertTrue(result.contains("Move completed!"));
 	}
+	
+	
 
 }
