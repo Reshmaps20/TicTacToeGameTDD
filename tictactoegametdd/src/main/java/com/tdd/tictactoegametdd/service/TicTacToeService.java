@@ -9,4 +9,9 @@ public class TicTacToeService {
 		return null;
 	}
 
+	public String resetGame() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

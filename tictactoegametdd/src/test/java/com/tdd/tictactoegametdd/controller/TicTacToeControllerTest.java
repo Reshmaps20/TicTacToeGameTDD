@@ -42,4 +42,15 @@ public class TicTacToeControllerTest {
 		verify(ticTacToeService, times(1)).makeMove(any(PlayerMove.class));
 	}
 
+	@Test
+	public void testResetGame_HandleGameReset_ReturnsGameReset() throws Exception {
+		
+		when(ticTacToeService.resetGame()).thenReturn("Game Reset!");
+	    mockMvc.perform(post("/tictactoe/reset")
+	    		.contentType(MediaType.APPLICATION_JSON))
+	            .andExpect(status().isOk())
+	            .andExpect(content().string("Game Reset!"));
+
+	    verify(ticTacToeService, times(1)).resetGame();
+	}
 }

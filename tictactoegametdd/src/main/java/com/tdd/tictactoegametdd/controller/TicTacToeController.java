@@ -21,4 +21,8 @@ public class TicTacToeController {
 		return ticTacToeService.makeMove(playerMove);
 	}
 
+	@PostMapping("/reset")
+	public String resetGame() {
+		return ticTacToeService.resetGame();
+	}
 }
