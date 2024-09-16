@@ -10,6 +10,7 @@ public class TicTacToeService {
 
 	private char[][] board = new char[3][3];
 	private char currentPlayer = 'X';
+	private boolean gameDraw = false;
 
 	public TicTacToeService() {
 		initializeBoard();
@@ -25,12 +26,24 @@ public class TicTacToeService {
 		int col = playerMove.getColumn();
 
 		if (!isValidMove(row, col)) {
-			throw new InvalidMoveException("Invalid move!Row and column must be between 0 and 2, and the cell must be empty.");
+			throw new InvalidMoveException(
+					"Invalid move!Row and column must be between 0 and 2, and the cell must be empty.");
 		}
 
 		board[row][col] = currentPlayer;
 		getNextPlayer();
+		
+		if (isBoardFull()) {
+			gameDraw = true;
+			return "The game is a draw!";
+		}
+		
 		return "Move completed!";
+	}
+
+	private boolean isBoardFull() {
+		return Arrays.stream(board).flatMapToInt(row -> IntStream.range(0, row.length).map(i -> row[i]))
+				.noneMatch(cell -> cell == ' ');
 	}
 
 	private boolean isValidMove(int row, int col) {

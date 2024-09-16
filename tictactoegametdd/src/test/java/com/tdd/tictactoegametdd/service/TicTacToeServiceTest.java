@@ -84,5 +84,23 @@ public class TicTacToeServiceTest {
 			ticTacToeService.makeMove(player);
 		});
 	}
+	
+	@Test
+	public void testMakeMove_CheckTheBoardIsFull_ReturnGameIsDraw() throws InvalidMoveException {
+
+		String result = fillBoard();
+		assertTrue(result.contains("The game is a draw!"));
+	}
+	
+	private String fillBoard() throws InvalidMoveException {
+
+		String result = "";
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				result = ticTacToeService.makeMove(new PlayerMove(i, j));
+			}
+		}
+		return result;
+	}
 
 }
