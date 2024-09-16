@@ -38,12 +38,16 @@ public class TicTacToeService {
 			return "The game is a draw!";
 		}
 
-		if (checkRows(currentPlayer)) {
+		if (checkRows(currentPlayer) || checkColumns(currentPlayer)) {
 			gameWon = true;
 			return "Player " + currentPlayer + " wins!";
 		}
 		getNextPlayer();
 		return "Move completed!";
+	}
+
+	private boolean checkColumns(char currentPlayer) {
+		return IntStream.range(0, 3).anyMatch(i -> (IntStream.range(0, 3).allMatch(j -> board[j][i] == currentPlayer)));
 	}
 
 	private boolean checkRows(char currentPlayer) {
