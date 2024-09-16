@@ -2,6 +2,7 @@ package com.tdd.tictactoegametdd.service;
 
 import java.util.Arrays;
 
+import com.tdd.tictactoegametdd.exception.InvalidMoveException;
 import com.tdd.tictactoegametdd.model.PlayerMove;
 
 public class TicTacToeService {
@@ -17,17 +18,18 @@ public class TicTacToeService {
 		Arrays.stream(board).forEach(row -> Arrays.fill(row, ' '));
 	}
 
-	public String makeMove(PlayerMove playerMove) {
+	public String makeMove(PlayerMove playerMove) throws InvalidMoveException {
 
 		int row = playerMove.getRow();
 		int col = playerMove.getColumn();
 
-		if(board[row][col] == ' ') {
+		if (board[row][col] == ' ') {
 			board[row][col] = currentPlayer;
 			getNextPlayer();
 			return "Move completed!";
+		} else {
+			throw new InvalidMoveException("Invalid move!Selected position is not empty");
 		}
-		return "Invalid";
 	}
 
 	public String resetGame() {
