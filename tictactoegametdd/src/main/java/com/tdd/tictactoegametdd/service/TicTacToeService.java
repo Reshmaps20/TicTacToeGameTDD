@@ -35,19 +35,22 @@ public class TicTacToeService {
 		if (!isValidMove(row, col)) {
 			throw new InvalidMoveException(GameConstants.INVALID_MOVE);
 		}
-
 		board[row][col] = currentPlayer;
+		String result = checkWin(currentPlayer) ? handleWin(currentPlayer) : handleDrawOrContinue();
+		getNextPlayer();
+		return result;
+	}
 
+	private String handleWin(char currentPlayer) {
+		gameWon = true;
+		return String.format(GameConstants.WINNER, currentPlayer, boardToString());
+	}
+
+	private String handleDrawOrContinue() {
 		if (isBoardFull()) {
 			gameDraw = true;
 			return GameConstants.DRAW;
 		}
-
-		if (checkWin(currentPlayer)) {
-			gameWon = true;
-			return String.format(GameConstants.WINNER, currentPlayer, boardToString());
-		}
-		getNextPlayer();
 		return String.format(GameConstants.MOVE_COMPELETED, boardToString());
 	}
 

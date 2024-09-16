@@ -14,7 +14,7 @@ public class TicTacToeServiceTest {
 	private TicTacToeService ticTacToeService;
 	public static final String GAME_OVER = "Game is already over";
 	public static final String GAME_RESET = "Game Reset";
-	public static final String WINNER = "Player %s wins!";
+	public static final String WINNER = "Player X wins!";
 	public static final String DRAW = "The game is a draw!";
 	public static final String MOVE_COMPELETED = "Move completed";
     public static final char Player_X = 'X';
