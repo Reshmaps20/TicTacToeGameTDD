@@ -12,6 +12,13 @@ import com.tdd.tictactoegametdd.model.PlayerMove;
 public class TicTacToeServiceTest {
 
 	private TicTacToeService ticTacToeService;
+	public static final String GAME_OVER = "Game is already over";
+	public static final String GAME_RESET = "Game Reset";
+	public static final String WINNER = "Player %s wins!";
+	public static final String DRAW = "The game is a draw!";
+	public static final String MOVE_COMPELETED = "Move completed";
+    public static final char Player_X = 'X';
+    public static final char Player_O = 'O';
 
 	@BeforeEach
 	public void setup() {
@@ -33,7 +40,7 @@ public class TicTacToeServiceTest {
 
 		PlayerMove player = new PlayerMove(0, 0);
 		String result = ticTacToeService.makeMove(player);
-		assertTrue(result.contains("Move completed!"));
+		assertTrue(result.contains(MOVE_COMPELETED));
 	}
 
 	@Test
@@ -42,10 +49,10 @@ public class TicTacToeServiceTest {
 
 		PlayerMove player = new PlayerMove(0, 1);
 		ticTacToeService.makeMove(player);
-		assertEquals(ticTacToeService.getCurrentPlayer(), 'O');
+		assertEquals(ticTacToeService.getCurrentPlayer(), Player_O);
 
 		ticTacToeService.makeMove(new PlayerMove(1, 1));
-		assertEquals(ticTacToeService.getCurrentPlayer(), 'X');
+		assertEquals(ticTacToeService.getCurrentPlayer(), Player_X);
 	}
 
 	@Test
@@ -53,7 +60,7 @@ public class TicTacToeServiceTest {
 
 		PlayerMove player = new PlayerMove(0, 1);
 		String result = ticTacToeService.makeMove(player);
-		assertTrue(result.contains("Move completed!"));
+		assertTrue(result.contains(MOVE_COMPELETED));
 	}
 
 	@Test
@@ -73,7 +80,7 @@ public class TicTacToeServiceTest {
 
 		PlayerMove player = new PlayerMove(0, 1);
 		String result = ticTacToeService.makeMove(player);
-		assertTrue(result.contains("Move completed!"));
+		assertTrue(result.contains(MOVE_COMPELETED));
 	}
 
 	@Test
@@ -91,32 +98,32 @@ public class TicTacToeServiceTest {
 
 		PlayerMove firstMove = new PlayerMove(0, 0);
 		ticTacToeService.makeMove(firstMove);
-		
+
 		PlayerMove secondMove = new PlayerMove(0, 1);
 		ticTacToeService.makeMove(secondMove);
-		
+
 		PlayerMove thirdMove = new PlayerMove(0, 2);
 		ticTacToeService.makeMove(thirdMove);
-		
+
 		PlayerMove forthMove = new PlayerMove(1, 0);
 		ticTacToeService.makeMove(forthMove);
-		
+
 		PlayerMove fifthMove = new PlayerMove(1, 2);
 		ticTacToeService.makeMove(fifthMove);
-		
+
 		PlayerMove sixthMove = new PlayerMove(1, 1);
 		ticTacToeService.makeMove(sixthMove);
-		
+
 		PlayerMove seventhMove = new PlayerMove(2, 0);
 		ticTacToeService.makeMove(seventhMove);
-		
+
 		PlayerMove eighthMove = new PlayerMove(2, 2);
 		ticTacToeService.makeMove(eighthMove);
-		
+
 		PlayerMove ninthMove = new PlayerMove(2, 1);
 		String result = ticTacToeService.makeMove(ninthMove);
-		
-		assertTrue(result.contains("The game is a draw!"));
+
+		assertTrue(result.contains(DRAW));
 	}
 
 	@Test
@@ -137,9 +144,9 @@ public class TicTacToeServiceTest {
 		PlayerMove fifthMove = new PlayerMove(0, 2);
 		String result = ticTacToeService.makeMove(fifthMove);
 
-		assertTrue(result.contains("Player " + ticTacToeService.getCurrentPlayer() + " wins!"));
+		assertTrue(result.contains(String.format(WINNER, ticTacToeService.getCurrentPlayer())));
 	}
-	
+
 	@Test
 	public void testMakeMove_PlayerWinsByCompletingAColumn_ReturnPlayerWhoWins() throws InvalidMoveException {
 
@@ -158,11 +165,12 @@ public class TicTacToeServiceTest {
 		PlayerMove fifthMove = new PlayerMove(2, 0);
 		String result = ticTacToeService.makeMove(fifthMove);
 
-		assertTrue(result.contains("Player " + ticTacToeService.getCurrentPlayer() + " wins!"));
+		assertTrue(result.contains(String.format(WINNER, ticTacToeService.getCurrentPlayer())));
 	}
-	
+
 	@Test
-	public void testMakeMove_PlayerWinsByCompletingLeftTopToRightBottomDiagonalPosition_ReturnPlayerWhoWins() throws InvalidMoveException {
+	public void testMakeMove_PlayerWinsByCompletingLeftTopToRightBottomDiagonalPosition_ReturnPlayerWhoWins()
+			throws InvalidMoveException {
 
 		PlayerMove firstMove = new PlayerMove(0, 0);
 		ticTacToeService.makeMove(firstMove);
@@ -179,11 +187,12 @@ public class TicTacToeServiceTest {
 		PlayerMove fifthMove = new PlayerMove(2, 2);
 		String result = ticTacToeService.makeMove(fifthMove);
 
-		assertTrue(result.contains("Player " + ticTacToeService.getCurrentPlayer() + " wins!"));
+		assertTrue(result.contains(String.format(WINNER, ticTacToeService.getCurrentPlayer())));
 	}
-	
+
 	@Test
-	public void testMakeMove_PlayerWinsByCompletingRightTopToLeftBottomDiagonalPosition_ReturnPlayerWhoWins() throws InvalidMoveException {
+	public void testMakeMove_PlayerWinsByCompletingRightTopToLeftBottomDiagonalPosition_ReturnPlayerWhoWins()
+			throws InvalidMoveException {
 
 		PlayerMove firstMove = new PlayerMove(0, 2);
 		ticTacToeService.makeMove(firstMove);
@@ -200,9 +209,9 @@ public class TicTacToeServiceTest {
 		PlayerMove fifthMove = new PlayerMove(2, 0);
 		String result = ticTacToeService.makeMove(fifthMove);
 
-		assertTrue(result.contains("Player " + ticTacToeService.getCurrentPlayer() + " wins!"));
+		assertTrue(result.contains(String.format(WINNER, ticTacToeService.getCurrentPlayer())));
 	}
-	
+
 	@Test
 	public void testMakeMove_CheckTheGameIsWonOrDraw_ReturnGameOver() throws InvalidMoveException {
 
@@ -220,18 +229,18 @@ public class TicTacToeServiceTest {
 
 		PlayerMove fifthMove = new PlayerMove(2, 2);
 		ticTacToeService.makeMove(fifthMove);
-		
+
 		PlayerMove sixthMove = new PlayerMove(1, 0);
-		String result = ticTacToeService.makeMove(forthMove);
-		
-		assertTrue(result.contains("Game is already over. Please restart to play again."));
+		String result = ticTacToeService.makeMove(sixthMove);
+
+		assertTrue(result.contains(GAME_OVER));
 	}
-	
+
 	@Test
 	public void testReset_ResetTheGame_ReturnGameReset() {
 
 		String result = ticTacToeService.resetGame();
-		assertTrue(result.contains("Game Reset!"));
+		assertTrue(result.contains(GAME_RESET));
 	}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tdd.tictactoegametdd.exception.InvalidMoveException;
 import com.tdd.tictactoegametdd.model.PlayerMove;
 import com.tdd.tictactoegametdd.service.TicTacToeService;
 
@@ -17,7 +18,7 @@ public class TicTacToeController {
 	TicTacToeService ticTacToeService;
 
 	@PostMapping("/playgame")
-	public String makeMove(@RequestBody PlayerMove playerMove) {
+	public String makeMove(@RequestBody PlayerMove playerMove) throws InvalidMoveException {
 		return ticTacToeService.makeMove(playerMove);
 	}
 

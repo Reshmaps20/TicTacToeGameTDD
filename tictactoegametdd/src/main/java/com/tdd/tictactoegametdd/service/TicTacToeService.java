@@ -1,15 +1,17 @@
 package com.tdd.tictactoegametdd.service;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.tdd.tictactoegametdd.constants.GameConstants;
 import com.tdd.tictactoegametdd.exception.InvalidMoveException;
 import com.tdd.tictactoegametdd.model.PlayerMove;
 
 public class TicTacToeService {
 
 	private char[][] board = new char[3][3];
-	private char currentPlayer = 'X';
+	private char currentPlayer = GameConstants.Player_X;
 	private boolean gameDraw = false;
 	private boolean gameWon = false;
 
@@ -27,27 +29,26 @@ public class TicTacToeService {
 		int col = playerMove.getColumn();
 
 		if (gameWon || gameDraw) {
-			return "Game is already over. Please restart to play again.";
+			return GameConstants.GAME_OVER;
 		}
-		
+
 		if (!isValidMove(row, col)) {
-			throw new InvalidMoveException(
-					"Invalid move!Row and column must be between 0 and 2, and the cell must be empty.");
+			throw new InvalidMoveException(GameConstants.INVALID_MOVE);
 		}
 
 		board[row][col] = currentPlayer;
 
 		if (isBoardFull()) {
 			gameDraw = true;
-			return "The game is a draw!";
+			return GameConstants.DRAW;
 		}
 
 		if (checkWin(currentPlayer)) {
 			gameWon = true;
-			return "Player " + currentPlayer + " wins!";
+			return String.format(GameConstants.WINNER, currentPlayer, boardToString());
 		}
 		getNextPlayer();
-		return "Move completed!";
+		return String.format(GameConstants.MOVE_COMPELETED, boardToString());
 	}
 
 	private boolean checkWin(char currentPlayer) {
@@ -77,7 +78,7 @@ public class TicTacToeService {
 		initializeBoard();
 		gameWon = false;
 		gameDraw = false;
-		return  "Game Reset!";
+		return GameConstants.GAME_RESET;
 	}
 
 	public char[][] getBoard() {
@@ -89,7 +90,12 @@ public class TicTacToeService {
 	}
 
 	private void getNextPlayer() {
-		currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+		currentPlayer = (currentPlayer == GameConstants.Player_X) ? GameConstants.Player_O : GameConstants.Player_X;
+	}
+
+	private Object boardToString() {
+		return Arrays.stream(board).map(row -> new String(row).replace("", " ").trim())
+				.collect(Collectors.joining("\n"));
 	}
 
 }
