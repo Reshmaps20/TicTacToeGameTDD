@@ -226,5 +226,12 @@ public class TicTacToeServiceTest {
 		
 		assertTrue(result.contains("Game is already over. Please restart to play again."));
 	}
+	
+	@Test
+	public void testReset_ResetTheGame_ReturnGameReset() {
+
+		String result = ticTacToeService.resetGame();
+		assertTrue(result.contains("Game Reset!"));
+	}
 
 }
