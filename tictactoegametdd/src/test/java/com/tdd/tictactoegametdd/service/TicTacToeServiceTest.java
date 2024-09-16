@@ -13,11 +13,11 @@ public class TicTacToeServiceTest {
 	@Test
 	public void testInitializeBoard_InitializeTheGameBoardWithEmptyCell_ReturnEmptyGameBoard() {
 
-		ticTacToeService.initializeBoard();
-
 		char[][] board = ticTacToeService.getBoard();
-		long emptyCellCount = IntStream.range(0, 3).flatMap(i -> IntStream.range(0, 3).filter(j -> board[i][j] == ' '))
-				.count();
+		long emptyCellCount = IntStream.range(0, 3)
+									.flatMap(i -> IntStream.range(0, 3)
+									.filter(j -> board[i][j] == ' '))
+									.count();
 
 		assertEquals(9, emptyCellCount);
 

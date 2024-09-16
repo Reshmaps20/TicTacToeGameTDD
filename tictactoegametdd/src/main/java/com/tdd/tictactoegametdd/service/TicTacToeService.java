@@ -8,7 +8,11 @@ public class TicTacToeService {
 
 	private char[][] board = new char[3][3];
 
-	public void initializeBoard() {
+	public TicTacToeService() {
+		initializeBoard();
+	}
+
+	private void initializeBoard() {
 		Arrays.stream(board).forEach(row -> Arrays.fill(row, ' '));
 	}
 
